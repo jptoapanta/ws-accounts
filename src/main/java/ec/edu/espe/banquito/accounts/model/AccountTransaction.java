@@ -60,9 +60,11 @@ public class AccountTransaction {
 
     @ManyToOne
     @JoinColumn(name = "PARENT_TRANSACTION_CODE", nullable = true, updatable = false, insertable = false)
+    @ToString.Exclude
     private AccountTransaction parentUK;
 
     @OneToMany(mappedBy = "parentUK", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<AccountTransaction> childrenAccountTransactions;
 
     @Enumerated(EnumType.STRING)

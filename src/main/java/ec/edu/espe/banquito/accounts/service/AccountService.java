@@ -29,7 +29,7 @@ public class AccountService {
 
     public List<AccountResDto> findAccountsByClientUK(String clientUK){
         List<AccountResDto> accountList=this.accountMapper.toRes(this.accountRepository.findByClientUk(clientUK));
-        System.out.println(accountList);
+
         if(accountList.isEmpty()){
             log.error("Client does not have accounts");
             throw new RuntimeException("Client does not have accounts");
