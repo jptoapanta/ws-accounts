@@ -27,7 +27,7 @@ public class Account {
     @Basic(optional = false)
     @Column(name = "ACCOUNT_CODE", updatable = false, nullable = false)
     private Integer id;
-    @Column(name = "UNIQUE_KEY", unique = true)
+    @Column(name = "UNIQUE_KEY", length = 36, unique = true)
     private String uniqueKey;
 
 

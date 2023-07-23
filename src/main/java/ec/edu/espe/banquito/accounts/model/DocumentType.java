@@ -26,6 +26,7 @@ public class DocumentType {
     private String name;
 
     @Column(name = "APPLICABILITY", length = 3)
+    @Enumerated(EnumType.STRING)
     private Applicability applicability;
 
     @ToString.Exclude
