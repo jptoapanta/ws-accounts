@@ -28,7 +28,7 @@ class AccountRepositoryTest {
                 .codeInternationalAccount("YYYYY")
                 .accountHolderType(Account.AccountHolderType.CUS)
                 .accountHolderCode("1721229399")
-                .name("Cuenta corriente XXXDD")
+                .name("Cuenta corriente AAAAAA")
                 .totalBalance(BigDecimal.valueOf(522.36))
                 .availableBalance(BigDecimal.valueOf(23.62))
                 .blockedBalance(BigDecimal.valueOf(1000))
@@ -39,7 +39,7 @@ class AccountRepositoryTest {
                 .closedDate(new Date())
                 .interestRate(BigDecimal.valueOf(5.2))
                 .activationDate(new Date())
-                .clientUk(UUID.randomUUID().toString())
+                .clientUk("49019afb-40bc-4860-ab7f-76e59ece1ce8")
 
                 .createdBy("rpfreire1")
                 .createdAt(new Date())
