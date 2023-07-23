@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class AccountService {
     private final AccountMapper accountMapper;
 
     @Transactional
-    public Account findById(Integer accountId){
+    public Account findByUK(Integer accountId){
         return this.accountRepository.findValidById(accountId).orElseThrow(()->{
             log.error("Account with id {} not found", accountId);
             return new RuntimeException("Account with id "+accountId+"not found");
@@ -35,6 +36,13 @@ public class AccountService {
         }
         return accountList;
 
+    }
+
+    public AccountResDto findAccountByAccountUK(String accountUK){
+        return this.accountMapper.toRes(this.accountRepository.findValidByUK(accountUK).orElseThrow(()->{
+            log.error("Account with id {} not found", accountUK);
+            return new RuntimeException("Account with id "+accountUK+"not found");
+        }));
     }
 
 

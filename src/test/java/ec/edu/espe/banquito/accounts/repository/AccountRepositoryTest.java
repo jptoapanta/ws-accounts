@@ -24,6 +24,7 @@ class AccountRepositoryTest {
     public void GenerateAccount(){
 
         Account account=Account.builder()
+                .uniqueKey(UUID.randomUUID().toString())
                 .codeInternalAccount("XXX")
                 .codeInternationalAccount("YYYYY")
                 .accountHolderType(Account.AccountHolderType.CUS)
@@ -40,6 +41,7 @@ class AccountRepositoryTest {
                 .interestRate(BigDecimal.valueOf(5.2))
                 .activationDate(new Date())
                 .clientUk("49019afb-40bc-4860-ab7f-76e59ece1ce8")
+                .productUk("XXKKKSKSKSKSKSKS")
 
                 .createdBy("rpfreire1")
                 .createdAt(new Date())

@@ -24,4 +24,11 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAccountsByClientUK(clientUK));
     }
 
+    @GetMapping("/account/{accountUK}")
+    public ResponseEntity<AccountResDto> findAccountsValidByAccountUK(
+            @PathVariable("accountUK") String accountUK
+    ){
+        return ResponseEntity.ok(accountService.findAccountByAccountUK(accountUK));
+    }
+
 }

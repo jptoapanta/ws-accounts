@@ -18,4 +18,8 @@ public interface AccountRepository extends JpaRepository<Account,Integer> {
             "where (ac.valid=true) and ac.clientUk=:clientUK")
     List<Account>findByClientUk(String clientUK);
 
+    @Query("Select ac from Account  ac " +
+            "where (ac.valid=true) and ac.uniqueKey=:accountUK")
+    Optional<Account>findValidByUK(String accountUK);
+
 }

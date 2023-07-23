@@ -30,6 +30,6 @@ public class AccountResDto implements Serializable {
     private String clientUk;
 
     private String groupUk;
-
+    private String productUk;
 
 }

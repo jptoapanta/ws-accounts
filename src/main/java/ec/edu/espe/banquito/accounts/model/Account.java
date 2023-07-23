@@ -69,8 +69,11 @@ public class Account {
 
     @Column(name = "CLIENT_UK", nullable = true)
     private String clientUk;
-    @Column(name = "Group_UK", nullable = true)
+    @Column(name = "GROUP_UK", nullable = true)
     private String groupUk;
+    @Column(name = "PRODUCT_UK", nullable = true)
+    private String productUk;
+
 
 
 
