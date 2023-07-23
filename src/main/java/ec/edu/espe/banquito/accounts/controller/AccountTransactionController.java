@@ -15,11 +15,11 @@ import java.util.List;
 public class AccountTransactionController {
     private final AccountTransanctionService accountTransanctionService;
 
-    @GetMapping("/history-transaction/{clientUK}")
+    @GetMapping("/history-transaction/{accountUK}")
     public ResponseEntity<List<AccountTransactionResDto>> findTransactionsByClientUK(
-        @PathVariable("clientUK") String clientUK
+        @PathVariable("accountUK") String accountUK
     ){
-        return ResponseEntity.ok(accountTransanctionService.findByAccountsTransactionByClientUK(clientUK));
+        return ResponseEntity.ok(accountTransanctionService.findByAccountsTransactionByClientUK(accountUK));
     }
 
 

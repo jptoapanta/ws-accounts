@@ -19,8 +19,8 @@ public class AccountTransanctionService {
     private final AccountTransactionMapper accountTransactionMapper;
     private final AccountTransactionRepository accountTransactionRepository;
 
-    public List<AccountTransactionResDto> findByAccountsTransactionByClientUK(String clientUK){
-        List<AccountTransactionResDto> accountTransactionList=this.accountTransactionMapper.toRes(this.accountTransactionRepository.findValidByAccountClientUkOrderByBookingDateDesc(clientUK));
+    public List<AccountTransactionResDto> findByAccountsTransactionByClientUK(String accountUK){
+        List<AccountTransactionResDto> accountTransactionList=this.accountTransactionMapper.toRes(this.accountTransactionRepository.findValidByAccountUniqueKeyOrderByBookingDateDesc(accountUK));
         if(accountTransactionList.isEmpty()){
             log.error("No transactions in this account");
             throw new RuntimeException("No transactions in this account");

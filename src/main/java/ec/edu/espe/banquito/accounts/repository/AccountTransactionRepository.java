@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface AccountTransactionRepository extends JpaRepository<AccountTransaction,Integer> {
     @Query("select act from AccountTransaction act " +
-            "where (act.valid=true) and act.account.clientUk=:clientUK")
-    List<AccountTransaction> findValidByAccountClientUkOrderByBookingDateDesc(String clientUK);
+            "where (act.valid=true) and act.account.uniqueKey=:accountUK")
+    List<AccountTransaction> findValidByAccountUniqueKeyOrderByBookingDateDesc(String accountUK);
 
 
 }
