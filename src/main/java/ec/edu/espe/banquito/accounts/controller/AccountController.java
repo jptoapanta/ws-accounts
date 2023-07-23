@@ -29,4 +29,11 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAccountByAccountUK(accountUK));
     }
 
+    @GetMapping("/account-internalcode/{accountInternalCode}")
+    public ResponseEntity<AccountResDto> findAccountsValidByAccountInternalCode(
+            @PathVariable("accountInternalCode") String accountInternalCode
+    ){
+        return ResponseEntity.ok(accountService.findAccountByInternalCodeAccount(accountInternalCode));
+    }
+
 }

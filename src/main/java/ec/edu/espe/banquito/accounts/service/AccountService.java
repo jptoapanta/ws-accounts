@@ -38,10 +38,17 @@ public class AccountService {
 
     }
 
+
     public AccountResDto findAccountByAccountUK(String accountUK){
         return this.accountMapper.toRes(this.accountRepository.findValidByUK(accountUK).orElseThrow(()->{
             log.error("Account with id {} not found", accountUK);
             return new RuntimeException("Account with id "+accountUK+"not found");
+        }));
+    }
+    public AccountResDto findAccountByInternalCodeAccount(String internalCodeAccount){
+        return this.accountMapper.toRes(this.accountRepository.findValidByCodeInternalAccount(internalCodeAccount).orElseThrow(()->{
+            log.error("Account with id {} not found", internalCodeAccount);
+            return new RuntimeException("Account with id "+internalCodeAccount+"not found");
         }));
     }
 
