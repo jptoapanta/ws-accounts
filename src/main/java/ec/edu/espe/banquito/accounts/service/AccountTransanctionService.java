@@ -37,7 +37,7 @@ public class AccountTransanctionService {
         return accountTransactionList;
     }
 
-    public AccountTransaction bankTransfer(AccountTransactionReqDto accountTransactionReqDto){
+    public AccountTransactionResDto bankTransfer(AccountTransactionReqDto accountTransactionReqDto){
         AccountTransaction accountTransaction=new AccountTransaction();
         Optional<Account> accountDebtorTmp=this.accountRepository.findValidByCodeInternalAccount(accountTransactionReqDto.getDebtorAccount());
         switch (accountTransactionReqDto.getTransactionType()){
@@ -89,6 +89,7 @@ public class AccountTransanctionService {
 
                     BigDecimal ammountCredtorTemp=accountTransactionCredtor.getAmmount();
                     BigDecimal resultCredtor=ammountCredtorTemp.add(ammountTemp);
+                    accountTransactionCredtor.setAmmount(resultCredtor);
                     this.accountTransactionRepository.save(accountTransactionCredtor);
                     this.accountTransactionRepository.save(accountTransactionDebtor);
                     this.accountRepository.save(accountCredtorTmp.get());
@@ -98,6 +99,6 @@ public class AccountTransanctionService {
 
 
         }
-        return accountTransaction;
+        return  this.accountTransactionMapper.toRes(accountTransaction);
     }
 }

@@ -1,7 +1,10 @@
 package ec.edu.espe.banquito.accounts.controller;
 
+import ec.edu.espe.banquito.accounts.controller.req.AccountTransactionReqDto;
 import ec.edu.espe.banquito.accounts.controller.res.AccountResDto;
+import ec.edu.espe.banquito.accounts.controller.res.AccountTransactionResDto;
 import ec.edu.espe.banquito.accounts.service.AccountService;
+import ec.edu.espe.banquito.accounts.service.AccountTransanctionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
     private final AccountService accountService;
+    private final AccountTransanctionService accountTransanctionService;
 
     @GetMapping("/accounts-client/{clientUK}")
     public ResponseEntity<List<AccountResDto>> findAccountsValidByClientUK(
@@ -34,6 +38,13 @@ public class AccountController {
             @PathVariable("accountInternalCode") String accountInternalCode
     ){
         return ResponseEntity.ok(accountService.findAccountByInternalCodeAccount(accountInternalCode));
+    }
+
+    @PostMapping("/transaction")
+    public ResponseEntity<AccountTransactionResDto> transactionAccounts(
+            @RequestBody AccountTransactionReqDto accountTransactionReqDto
+            ){
+        return ResponseEntity.ok(this.accountTransanctionService.bankTransfer(accountTransactionReqDto));
     }
 
 }
