@@ -26,7 +26,7 @@ public class AccountTransaction {
     @Basic(optional = false)
     @Column(name = "ACCOUNT_TRANSACTION_CODE", updatable = false, nullable = false)
     private Integer id;
-    @Column(name = "UNIQUE_KEY", unique = true)
+    @Column(name = "UNIQUE_KEY",length =255, unique = true)
     private String uniqueKey;
     @Column(name = "TRANSACTION_TYPE", length = 12, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -35,13 +35,13 @@ public class AccountTransaction {
     private String reference;
     @Column(name = "AMMOUNT", precision = 18, scale = 2, nullable = false)
     private BigDecimal ammount;
-    @Column(name = "CREDITOR_BANK_CODE", length = 100, nullable = false)
+    @Column(name = "CREDITOR_BANK_CODE", length = 100, nullable = true)
     private String creditorBankCode;
-    @Column(name = "CREDITOR_ACCOUNT", length = 100, nullable = false)
+    @Column(name = "CREDITOR_ACCOUNT", length = 100, nullable = true)
     private String creditorAccount;
-    @Column(name = "DEBTOR_BANK_CODE", length = 100, nullable = false)
+    @Column(name = "DEBTOR_BANK_CODE", length = 100, nullable = true)
     private String debtorBankCode;
-    @Column(name = "DEBTOR_ACCOUNT", length = 100, nullable = false)
+    @Column(name = "DEBTOR_ACCOUNT", length = 100, nullable = true)
     private String debtorAccount;
     @Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)

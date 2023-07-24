@@ -25,6 +25,7 @@ public class AccountTransanctionService {
             log.error("No transactions in this account");
             throw new RuntimeException("No transactions in this account");
         }
+
         return accountTransactionList;
     }
 }
