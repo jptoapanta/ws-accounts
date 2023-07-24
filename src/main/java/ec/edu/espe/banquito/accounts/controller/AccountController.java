@@ -1,18 +1,23 @@
 package ec.edu.espe.banquito.accounts.controller;
 
 import ec.edu.espe.banquito.accounts.controller.res.AccountResDto;
+import ec.edu.espe.banquito.accounts.controller.res.ProductResDto;
 import ec.edu.espe.banquito.accounts.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/accounts")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
+    private final RestTemplate restTemplate;
     private final AccountService accountService;
 
     @GetMapping("/accounts-client/{clientUK}")
@@ -36,4 +41,11 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAccountByInternalCodeAccount(accountInternalCode));
     }
 
+    @GetMapping("/product/{accountUK}")
+    public ResponseEntity<ProductResDto> findByRestProduct(@PathVariable("accountUK") String accountInternalCode)
+    {
+        String url = "http://localhost:8080/api/v1/productAccount/productos/12345";
+        ProductResDto productResDto = restTemplate.getForObject(url, ProductResDto.class);
+        return ResponseEntity.ok(productResDto);
+    }
 }
