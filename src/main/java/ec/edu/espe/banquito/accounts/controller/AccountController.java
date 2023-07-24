@@ -41,10 +41,10 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findAccountByInternalCodeAccount(accountInternalCode));
     }
 
-    @GetMapping("/product/{accountUK}")
-    public ResponseEntity<ProductResDto> findByRestProduct(@PathVariable("accountUK") String accountInternalCode)
+    @GetMapping("/product/{productUK}")
+    public ResponseEntity<ProductResDto> findByRestProduct(@PathVariable("productUK") String productUK)
     {
-        String url = "http://localhost:8080/api/v1/productAccount/productos/12345";
+        String url = "http://localhost:8080/api/v1/productAccount/productos/"+productUK;
         ProductResDto productResDto = restTemplate.getForObject(url, ProductResDto.class);
         return ResponseEntity.ok(productResDto);
     }
