@@ -61,6 +61,7 @@ public class AccountTransanctionService {
                             .state(AccountTransaction.State.ACT)
                             .notes(accountTransactionReqDto.getNotes())
                             .account(accountDebtorTmp.get())
+                            .valid(true)
                             .build();
 
                     //BigDecimal ammountTemp=accountTransactionReqDto.getAmmount();
@@ -81,6 +82,7 @@ public class AccountTransanctionService {
                             .state(AccountTransaction.State.ACT)
                             .notes(accountTransactionReqDto.getNotes())
                             .account(accountCredtorTmp.get())
+                            .valid(true)
                             .build();
 
                     BigDecimal ammountDebtorTemp=accountTransactionDebtor.getAmmount();
