@@ -43,12 +43,13 @@ public class AccountTransanctionService {
         switch (accountTransactionReqDto.getTransactionType()){
             case "TRANSFER":
                 Optional<Account> accountCredtorTmp=this.accountRepository.findValidByCodeInternalAccount(accountTransactionReqDto.getCreditorAccount());
+                BigDecimal ammountTmp=accountTransactionReqDto.getAmmount();
                 if(accountDebtorTmp.isPresent() && accountCredtorTmp.isPresent()){
                     AccountTransaction accountTransactionDebtor=AccountTransaction.builder()
                             .uniqueKey(UUID.randomUUID().toString())
                             .transactionType(AccountTransaction.TransactionType.TRANSFER)
                             .reference(accountTransactionReqDto.getReference())
-                            .ammount(accountTransactionReqDto.getAmmount())
+                            .ammount(ammountTmp.multiply(BigDecimal.valueOf(-1)))
                             .creditorAccount(accountTransactionReqDto.getCreditorAccount())
                             .creditorBankCode(accountTransactionReqDto.getCreditorBankCode())
                             .debtorAccount(accountTransactionReqDto.getDebtorAccount())
@@ -62,13 +63,13 @@ public class AccountTransanctionService {
                             .account(accountDebtorTmp.get())
                             .build();
 
-                    BigDecimal ammountTemp=accountTransactionReqDto.getAmmount();
+                    //BigDecimal ammountTemp=accountTransactionReqDto.getAmmount();
 
                     AccountTransaction accountTransactionCredtor=AccountTransaction.builder()
                             .uniqueKey(UUID.randomUUID().toString())
                             .transactionType(AccountTransaction.TransactionType.TRANSFER)
                             .reference(accountTransactionReqDto.getReference())
-                            .ammount(accountTransactionReqDto.getAmmount())
+                            .ammount(ammountTmp)
                             .creditorAccount(accountTransactionReqDto.getCreditorAccount())
                             .creditorBankCode(accountTransactionReqDto.getCreditorBankCode())
                             .debtorAccount(accountTransactionReqDto.getDebtorBankCode())
@@ -83,15 +84,15 @@ public class AccountTransanctionService {
                             .build();
 
                     BigDecimal ammountDebtorTemp=accountTransactionDebtor.getAmmount();
-
-                    BigDecimal resultDebtor=ammountDebtorTemp.subtract(ammountTemp);
-                    accountTransactionDebtor.setAmmount(resultDebtor);
+                    BigDecimal resultDebtor=ammountDebtorTemp.subtract(ammountTmp);
+                    accountDebtorTmp.get().setAvailableBalance(resultDebtor);
 
                     BigDecimal ammountCredtorTemp=accountTransactionCredtor.getAmmount();
-                    BigDecimal resultCredtor=ammountCredtorTemp.add(ammountTemp);
-                    accountTransactionCredtor.setAmmount(resultCredtor);
-                    this.accountTransactionRepository.save(accountTransactionCredtor);
+                    BigDecimal resultCredtor=ammountCredtorTemp.add(ammountTmp);
+                    accountCredtorTmp.get().setAvailableBalance(resultCredtor);
+
                     this.accountTransactionRepository.save(accountTransactionDebtor);
+                    this.accountTransactionRepository.save(accountTransactionCredtor);
                     this.accountRepository.save(accountCredtorTmp.get());
                     this.accountRepository.save(accountDebtorTmp.get());
 
